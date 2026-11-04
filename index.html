@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frida · Micropigmentació &amp; Bellesa en Lloret de Mar</title>
+<meta name="description" content="Micropigmentación, pestañas, láser, uñas, faciales, masajes y corporales en Lloret de Mar. Consulta las ofertas activas de hoy y pide cita por WhatsApp.">
+<meta name="theme-color" content="#2c2730">
+<link rel="canonical" href="https://tomaevmiron.github.io/frida/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Frida · Micropigmentació & Bellesa">
+<meta property="og:description" content="Micropigmentación, láser, pestañas, uñas, faciales y masajes en Lloret de Mar.">
+<meta property="og:image" content="https://tomaevmiron.github.io/frida/img/fachada.jpg">
+<link rel="icon" href="img/arte/frida-logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Norican&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BeautySalon","name":"Frida Bellesa",
+  "description":"Micropigmentación y belleza en Lloret de Mar.",
+  "url":"https://tomaevmiron.github.io/frida/","image":"https://tomaevmiron.github.io/frida/img/fachada.jpg",
+  "telephone":"+34672874616",
+  "address":{"@type":"PostalAddress","streetAddress":"Av. de Vidreres, 159","postalCode":"17310","addressLocality":"Lloret de Mar","addressRegion":"Girona","addressCountry":"ES"},
+  "geo":{"@type":"GeoCoordinates","latitude":41.7099047,"longitude":2.8375709},
+  "openingHours":"Mo-Fr 10:00-19:00",
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.7","reviewCount":"18"},
+  "sameAs":["https://www.instagram.com/frida_bellessa/","https://www.fresha.com/lvp/frida-bellesa-avinguda-de-vidreres-lloret-de-mar-Gyjwy0"]
+}
+</script>
+</head>
+<body>
+<script src="js/arte.js"></script>
+<script>document.documentElement.classList.add('js')</script>
+<a class="saltar" href="#ofertas">Saltar al contenido</a>
+
+<!-- ============ CABECERA ============ -->
+<header class="cab" id="cab">
+  <a class="banda" id="banda" href="#ofertas"></a>
+  <div class="cab-fila">
+    <button class="cab-menu" id="btnMenu" type="button" aria-haspopup="dialog"><span class="lineas" aria-hidden="true"></span>Menú</button>
+    <a class="cab-logo" href="#portada" aria-label="Frida, volver al inicio">
+      <svg viewBox="0 0 1470 800" aria-hidden="true"><use href="#logo"/></svg>
+    </a>
+    <div class="cab-der">
+      <span class="estado" id="estadoLocal"></span>
+      <button class="btn btn-sol" type="button" data-abrir-visita>Pedir cita</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ PORTADA: el letrero, y de ahí a la mirada ============ -->
+<section class="portada" id="portada" data-tinte="#2c2730" aria-label="Frida, Micropigmentació y Bellesa">
+  <div class="escena">
+    <div class="luz" aria-hidden="true"></div>
+    <img class="flor flor-izq" src="img/arte/flores.png" alt="" width="604" height="606">
+    <img class="flor flor-der" src="img/arte/flores.png" alt="" width="604" height="606">
+    <div class="marca">
+      <h1 class="marca-logo">
+        <span class="vh">Frida</span>
+        <svg class="logo-sombra" viewBox="-20 -20 1530 840" aria-hidden="true"><use href="#logo" fill="#0d0b10"/></svg>
+        <svg class="logo-3d" viewBox="-20 -20 1530 840" aria-hidden="true" id="logo3d"></svg>
+      </h1>
+      <p class="marca-sub">Micropigmentació &amp; Bellesa</p>
+    </div>
+    <div class="retrato" id="retratoPortada" aria-hidden="true"><svg viewBox="0 0 946 1738"></svg></div>
+    <ul class="portada-datos">
+      <li><strong id="datoNota">4,7</strong> en Google</li>
+      <li>Lunes a viernes, 10–19 h</li>
+      <li>Lloret de Mar</li>
+      <li class="baja-item" aria-hidden="true"><span class="baja"></span></li>
+    </ul>
+    <div class="foto-ojo" aria-hidden="true"><img src="img/ojo-portada.jpg" alt="" width="2000" height="1125"></div>
+    <div class="frase-ojo">
+      <p class="frase-script">Frida hizo de su rostro una obra.</p>
+      <p class="frase-sans">Aquí trabajamos el tuyo igual: trazo a trazo y sin prisa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOY EN FRIDA: ofertas ============ -->
+<section class="ofertas" id="ofertas" data-tinte="#5f474f" aria-labelledby="ofertasTit">
+  <img class="adorno ad-of" src="img/arte/ramita-oro.png" alt="" width="225" height="175" loading="lazy">
+  <div class="envuelve">
+    <p class="ante" id="ofertasFecha"></p>
+    <h2 class="titulo" id="ofertasTit"></h2>
+    <p class="entrada" id="ofertasEntrada"></p>
+    <div class="ofertas-lista" id="ofertasLista"></div>
+    <div class="ofertas-sin" id="ofertasSin" hidden></div>
+
+    <div class="calendario aparece">
+      <div class="cal-cab">
+        <h3 class="cal-tit" id="calTit"></h3>
+        <p class="cal-pie" id="calPie"></p>
+      </div>
+      <div class="cal-marco" id="calMarco"></div>
+      <p class="cal-detalle" id="calDetalle" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA GAMA ============ -->
+<section class="gama" id="gama" aria-labelledby="gamaTit">
+  <div class="gama-cab envuelve" data-tinte="#2c2730">
+    <p class="ante">La gama</p>
+    <h2 class="titulo" id="gamaTit">Ocho maneras de cuidarte</h2>
+    <p class="entrada">Cada servicio, con su ficha: qué es, cuántas sesiones suele pedir y cuánto dura. Pulsa el <span class="mas-mini" aria-hidden="true">+</span> en lo que te interese y lo tendrás reunido para pedir cita de una vez.</p>
+  </div>
+  <nav class="indice" id="indice" aria-label="Capítulos de servicios"></nav>
+  <div id="capitulos"></div>
+</section>
+
+<!-- ============ RESULTADOS ============ -->
+<section class="resultados" id="resultados" data-tinte="#1f1b23" aria-labelledby="resTit">
+  <div class="envuelve res-cab">
+    <div>
+      <p class="ante">Resultados</p>
+      <h2 class="titulo" id="resTit">Hecho aquí</h2>
+    </div>
+    <div class="res-der">
+      <p class="entrada">Todas las fotos de esta galería son trabajos reales del salón. Nada de bancos de imágenes.</p>
+      <div class="filtros" id="filtros" role="group" aria-label="Filtrar resultados">
+        <button type="button" class="filtro activo" data-f="todos" aria-pressed="true">Todos</button>
+        <button type="button" class="filtro" data-f="pestanas" aria-pressed="false">Pestañas</button>
+        <button type="button" class="filtro" data-f="cejas" aria-pressed="false">Cejas</button>
+        <button type="button" class="filtro" data-f="ojos" aria-pressed="false">Eyeliner</button>
+      </div>
+    </div>
+  </div>
+  <div class="rail" id="rail" tabindex="0" aria-label="Galería de resultados"></div>
+  <div class="rail-nav envuelve">
+    <button type="button" class="flecha" id="railAtras" aria-label="Foto anterior">←</button>
+    <button type="button" class="flecha" id="railDelante" aria-label="Foto siguiente">→</button>
+  </div>
+  <div class="envuelve destacadas">
+    <p class="dest-tit">Más casos, en sus destacadas de Instagram</p>
+    <div class="dest-lista" id="destacadas"></div>
+  </div>
+</section>
+
+<!-- ============ ANTES Y DESPUÉS ============ -->
+<section class="antes" id="antes-despues" data-tinte="#2c2730" aria-labelledby="adTit">
+  <div class="envuelve antes-grid">
+    <div class="antes-txt">
+      <p class="ante">Antes y después</p>
+      <h2 class="titulo" id="adTit">Desliza</h2>
+      <p class="entrada" id="adTexto"></p>
+      <div class="ad-botones" id="adBotones"></div>
+    </div>
+    <div class="ad-comparador" id="adComparador" role="group" aria-label="Comparador antes y después">
+      <div class="ad-capa ad-despues" id="adDespues"></div>
+      <div class="ad-capa ad-antesc" id="adAntes"></div>
+      <span class="ad-eti ad-eti-a">Antes</span>
+      <span class="ad-eti ad-eti-d">Después</span>
+      <div class="ad-linea" id="adLinea"><span class="ad-mango" aria-hidden="true"></span></div>
+      <input class="ad-range" id="adRango" type="range" min="0" max="100" value="50" aria-label="Mover separador entre antes y después">
+    </div>
+  </div>
+</section>
+
+<!-- ============ TARJETA REGALO ============ -->
+<section class="regalo" id="regalo" data-tinte="#5f474f" aria-labelledby="regTit">
+  <div class="envuelve regalo-grid">
+    <div class="tarjeta-escena">
+      <div class="tarjeta" id="tarjeta">
+        <img class="tarjeta-flor" src="img/arte/flores.png" alt="" width="604" height="606" loading="lazy">
+        <svg class="tarjeta-logo" viewBox="0 0 1470 800" aria-hidden="true"><use href="#logo"/></svg>
+        <p class="tarjeta-sub">Tarjeta regalo</p>
+        <dl class="tarjeta-datos">
+          <div><dt>Para</dt><dd id="tjPara">Alguien especial</dd></div>
+          <div><dt>De parte de</dt><dd id="tjDe">Ti</dd></div>
+          <div class="ancho"><dt>Regalo</dt><dd id="tjQue">Masaje corporal</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="regalo-txt">
+      <p class="ante">Tarjeta regalo personalizada</p>
+      <h2 class="titulo" id="regTit">Así seguro que aciertas</h2>
+      <form class="form" id="formRegalo">
+        <label>Para quién<input id="fPara" type="text" maxlength="28" placeholder="Su nombre" autocomplete="off"></label>
+        <label>De tu parte<input id="fDe" type="text" maxlength="28" placeholder="Tu nombre" autocomplete="off"></label>
+        <label class="ancho">Qué le regalas<select id="fQue"></select></label>
+        <button class="btn btn-sol ancho" type="submit">Pedirla por WhatsApp</button>
+      </form>
+      <p class="nota-peq">Te la preparan en el salón con el nombre que escribas aquí.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPINIONES ============ -->
+<section class="opiniones" id="opiniones" data-tinte="#4d3e4f" aria-labelledby="opTit">
+  <div class="envuelve opi-grid">
+    <div class="opi-nota">
+      <p class="ante" id="opTit">Opiniones en Google</p>
+      <p class="nota-grande" id="notaGrande"></p>
+      <div class="estrellas" aria-hidden="true">
+        <span style="--r:94%"></span>
+      </div>
+      <p class="opi-sub" id="opiSub"></p>
+      <a class="enlace" id="opiLink" target="_blank" rel="noopener">Leerlas en Google</a>
+    </div>
+    <figure class="opi-cita">
+      <blockquote id="citaTexto" aria-live="polite"></blockquote>
+      <figcaption id="citaAutor"></figcaption>
+      <div class="opi-nav">
+        <button type="button" class="flecha" id="citaAtras" aria-label="Opinión anterior">←</button>
+        <button type="button" class="flecha" id="citaDelante" aria-label="Opinión siguiente">→</button>
+        <span class="opi-pos" id="citaPos"></span>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PREGUNTAS ============ -->
+<section class="preguntas" id="preguntas" data-tinte="#3d3a50" aria-labelledby="preTit">
+  <div class="envuelve pre-grid">
+    <div>
+      <p class="ante">Antes de venir</p>
+      <h2 class="titulo" id="preTit">Lo que más se pregunta</h2>
+    </div>
+    <div class="pre-lista">
+      <details><summary>¿Cómo pido cita?</summary><p>Por WhatsApp, al <a data-tel></a>. Es la vía que usan en el salón. Puedes preparar el mensaje desde esta misma web, con todo lo que quieres hacerte. Frida también aparece en Fresha.</p></details>
+      <details><summary>¿La micropigmentación duele?</summary><p>La mayoría de las personas lo describe como una molestia leve. Depende de la zona y de cada piel, y se habla contigo antes de empezar para que sepas qué vas a notar.</p></details>
+      <details><summary>¿Cuánto dura el resultado?</summary><p>Como referencia, entre uno y tres años según la zona. El pigmento se va aclarando con el tiempo, y el sol, el tipo de piel y los cuidados influyen mucho. El retoque sirve para fijar el color y ajustar lo que haga falta.</p></details>
+      <details><summary>¿Cuántas sesiones necesita un tatuaje?</summary><p>Lo habitual son entre 6 y 10, separadas de 6 a 8 semanas. Los colores y la profundidad de la tinta marcan la diferencia, así que el número real se confirma al verlo.</p></details>
+      <details><summary>¿Cómo sé si hay ofertas?</summary><p>Mirando el principio de esta página. Si hay una oferta activa, verás su precio y los días que le quedan. Si no la hay, también te lo decimos. Cuando termina una oferta, desaparece sola.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISÍTANOS ============ -->
+<section class="visita" id="visita" data-tinte="#2c2730" aria-labelledby="visTit">
+  <figure class="visita-foto">
+    <img src="img/fachada.jpg" alt="Fachada de Frida en la Avenida de Vidreres, con su letrero y sus flores" width="2000" height="1125" loading="lazy">
+  </figure>
+  <div class="envuelve visita-grid">
+    <div class="visita-col">
+      <p class="ante">Dónde estamos</p>
+      <h2 class="titulo" id="visTit">Ven a vernos</h2>
+      <address class="dir">
+        <span id="visDir"></span><br><span id="visCiudad"></span>
+      </address>
+      <a class="enlace" id="visComoLlegar" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+    <div class="visita-col">
+      <h3 class="sub-h">Horario</h3>
+      <ul class="horario" id="horario"></ul>
+      <p class="nota-peq">Siempre con cita previa.</p>
+    </div>
+    <div class="visita-col">
+      <h3 class="sub-h">Reserva</h3>
+      <ul class="canales">
+        <li><a id="canalWa" target="_blank" rel="noopener"><span>WhatsApp</span><small id="canalWaTel"></small></a></li>
+        <li><a id="canalFresha" target="_blank" rel="noopener"><span>Fresha</span><small>Frida Bellesa en Fresha</small></a></li>
+        <li><a id="canalIg" target="_blank" rel="noopener"><span>Instagram</span><small>@frida_bellessa</small></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="mapa">
+    <iframe id="mapa" title="Mapa de Frida Bellesa en Lloret de Mar" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="pie" data-tinte="#1f1b23">
+  <img class="flor flor-pie" src="img/arte/flores.png" alt="" width="604" height="606" loading="lazy">
+  <div class="envuelve pie-fila">
+    <p>Micropigmentació &amp; Bellesa<br>Lloret de Mar</p>
+    <nav aria-label="Enlaces del pie" class="pie-enlaces">
+      <a href="#ofertas">Ofertas</a>
+      <a href="#gama">La gama</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#regalo">Tarjeta regalo</a>
+      <a data-fresha target="_blank" rel="noopener">Fresha</a>
+      <a data-ig target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+  <svg class="pie-logo" viewBox="0 0 1470 800" aria-hidden="true"><use href="#logo"/></svg>
+</footer>
+
+<!-- ============ BARRA DE VISITA ============ -->
+<div class="barra" id="barra">
+  <button class="barra-visita" type="button" data-abrir-visita><span class="barra-num" id="barraNum">0</span><span id="barraTxt">Mi visita</span></button>
+  <a class="barra-wa" id="barraWa" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<!-- ============ DIÁLOGO: MI VISITA ============ -->
+<dialog class="panel" id="panelVisita" aria-labelledby="pvTit">
+  <div class="panel-cab">
+    <h2 id="pvTit">Mi visita</h2>
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="panel-cuerpo">
+    <ul class="pv-lista" id="pvLista"></ul>
+    <p class="pv-vacia" id="pvVacia">Todavía no has elegido nada. Puedes añadir servicios desde <a href="#gama" data-cerrar>la gama</a>, o escribir directamente al salón.</p>
+    <fieldset class="pv-grupo">
+      <legend>¿Qué día te viene mejor?</legend>
+      <div class="chips" id="pvDias"></div>
+    </fieldset>
+    <fieldset class="pv-grupo">
+      <legend>¿A qué hora?</legend>
+      <div class="chips" id="pvHoras"></div>
+    </fieldset>
+    <label class="pv-nota">Algo que quieras contar (opcional)
+      <textarea id="pvNota" rows="2" maxlength="240"></textarea>
+    </label>
+    <div class="pv-previa">
+      <p class="pv-previa-tit">Así se enviará</p>
+      <pre id="pvPrevia"></pre>
+    </div>
+  </div>
+  <div class="panel-pie">
+    <a class="btn btn-sol" id="pvEnviar" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+    <a class="btn btn-linea" id="pvFresha" target="_blank" rel="noopener">Ver en Fresha</a>
+  </div>
+</dialog>
+
+<!-- ============ DIÁLOGO: MENÚ ============ -->
+<dialog class="menu" id="menu" aria-label="Menú">
+  <button class="cerrar cerrar-menu" type="button" data-cerrar aria-label="Cerrar menú">×</button>
+  <div class="menu-grid">
+    <nav class="menu-nav" id="menuNav" aria-label="Secciones"></nav>
+    <div class="menu-vista" aria-hidden="true"><img id="menuImg" src="img/pestanas-perfil.jpg" alt=""></div>
+  </div>
+</dialog>
+
+<!-- ============ DIÁLOGO: FOTO ============ -->
+<dialog class="visor" id="visor" aria-label="Foto ampliada">
+  <button class="cerrar" type="button" data-cerrar aria-label="Cerrar foto">×</button>
+  <img id="visorImg" alt="">
+  <p id="visorPie"></p>
+</dialog>
+
+<noscript><p style="padding:24px;color:#fff;background:#2c2730">Pide cita por WhatsApp al 672 87 46 16. Av. de Vidreres, 159, Lloret de Mar.</p></noscript>
+
+<script src="datos/config.js"></script>
+<script src="datos/ofertas.js"></script>
+<script src="datos/servicios.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
