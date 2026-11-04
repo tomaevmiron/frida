@@ -123,9 +123,11 @@
       <p class="entrada">Todas las fotos de esta galería son trabajos reales del salón. Nada de bancos de imágenes.</p>
       <div class="filtros" id="filtros" role="group" aria-label="Filtrar resultados">
         <button type="button" class="filtro activo" data-f="todos" aria-pressed="true">Todos</button>
-        <button type="button" class="filtro" data-f="pestanas" aria-pressed="false">Pestañas</button>
+        <button type="button" class="filtro" data-f="labios" aria-pressed="false">Labios</button>
         <button type="button" class="filtro" data-f="cejas" aria-pressed="false">Cejas</button>
         <button type="button" class="filtro" data-f="ojos" aria-pressed="false">Eyeliner</button>
+        <button type="button" class="filtro" data-f="pestanas" aria-pressed="false">Pestañas</button>
+        <button type="button" class="filtro" data-f="unas" aria-pressed="false">Uñas</button>
       </div>
     </div>
   </div>
@@ -146,8 +148,9 @@
     <div class="antes-txt">
       <p class="ante">Antes y después</p>
       <h2 class="titulo" id="adTit">Desliza</h2>
-      <p class="entrada" id="adTexto"></p>
-      <div class="ad-botones" id="adBotones"></div>
+      <div class="ad-botones" id="adBotones" role="group" aria-label="Elegir tratamiento"></div>
+      <p class="entrada" id="adTexto" aria-live="polite"></p>
+      <p class="nota-peq">Casos publicados por Frida en su Instagram. Cada piel responde de forma distinta.</p>
     </div>
     <div class="ad-comparador" id="adComparador" role="group" aria-label="Comparador antes y después">
       <div class="ad-capa ad-despues" id="adDespues"></div>
@@ -171,7 +174,7 @@
         <dl class="tarjeta-datos">
           <div><dt>Para</dt><dd id="tjPara">Alguien especial</dd></div>
           <div><dt>De parte de</dt><dd id="tjDe">Ti</dd></div>
-          <div class="ancho"><dt>Regalo</dt><dd id="tjQue">Masaje corporal</dd></div>
+          <div class="ancho"><dt>Regalo</dt><dd id="tjQue">Masaje relajante</dd></div>
         </dl>
       </div>
     </div>
@@ -184,7 +187,7 @@
         <label class="ancho">Qué le regalas<select id="fQue"></select></label>
         <button class="btn btn-sol ancho" type="submit">Pedirla por WhatsApp</button>
       </form>
-      <p class="nota-peq">Te la preparan en el salón con el nombre que escribas aquí.</p>
+      <p class="nota-peq">Te la preparan en el salón con el nombre que escribas aquí. También hay bonos a medida, desde 30 €.</p>
     </div>
   </div>
 </section>
@@ -224,7 +227,7 @@
       <details><summary>¿Cómo pido cita?</summary><p>Por WhatsApp, al <a data-tel></a>. Es la vía que usan en el salón. Puedes preparar el mensaje desde esta misma web, con todo lo que quieres hacerte. Frida también aparece en Fresha.</p></details>
       <details><summary>¿La micropigmentación duele?</summary><p>La mayoría de las personas lo describe como una molestia leve. Depende de la zona y de cada piel, y se habla contigo antes de empezar para que sepas qué vas a notar.</p></details>
       <details><summary>¿Cuánto dura el resultado?</summary><p>Como referencia, entre uno y tres años según la zona. El pigmento se va aclarando con el tiempo, y el sol, el tipo de piel y los cuidados influyen mucho. El retoque sirve para fijar el color y ajustar lo que haga falta.</p></details>
-      <details><summary>¿Cuántas sesiones necesita un tatuaje?</summary><p>Lo habitual son entre 6 y 10, separadas de 6 a 8 semanas. Los colores y la profundidad de la tinta marcan la diferencia, así que el número real se confirma al verlo.</p></details>
+      <details><summary>¿Cuántas sesiones necesita un tatuaje?</summary><p>Lo habitual son entre 6 y 10, separadas de 6 a 8 semanas. Los colores y la profundidad de la tinta marcan la diferencia, así que el número real se confirma al verlo, en una cita informativa gratuita.</p></details>
       <details><summary>¿Cómo sé si hay ofertas?</summary><p>Mirando el principio de esta página. Si hay una oferta activa, verás su precio y los días que le quedan. Si no la hay, también te lo decimos. Cuando termina una oferta, desaparece sola.</p></details>
     </div>
   </div>

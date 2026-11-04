@@ -325,13 +325,28 @@
     return '<svg class="rasgo" viewBox="' + vb + '" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       indices.map(function (i) { return '<path vector-effect="non-scaling-stroke" d="' + ps[i].getAttribute('d') + '"/>'; }).join('') + '</svg>';
   }
+  // La línea de oferta de cada ficha sale de las fechas de ofertas.js, nunca de un texto fijo
+  function promoDe(id) {
+    var tiene = function (o) { return (o.servicios || []).indexOf(id) >= 0; };
+    var a = activas.filter(tiene)[0];
+    if (a) return { txt: 'En oferta ahora: ' + a.titulo + ', ' + a.precio + ' €', viva: true };
+    var p = proximas.filter(tiene)[0];
+    if (p) return { txt: 'Próxima oferta el ' + bonita(p.desde) + ': ' + p.precio + ' €', viva: true };
+    var u = pasadas.filter(tiene)[0];
+    if (u) {
+      var anio = u.hasta.slice(0, 4), mes = MESES[+u.hasta.slice(5, 7) - 1];
+      return { txt: 'Última promo: ' + u.precio + ' € en ' + mes + (anio === HOY.slice(0, 4) ? '' : ' de ' + anio) };
+    }
+    return null;
+  }
   function filaHTML(s) {
     var specs = (s.specs || []).map(function (x) { return '<div class="spec"><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>'; }).join('');
+    var promo = promoDe(s.id);
     return '<li class="fila aparece">' +
       '<div class="fila-info"><h4 class="fila-nombre" style="margin:0">' + esc(s.nombre) + '</h4><p class="fila-sub">' + esc(s.sub) + '</p><p class="fila-texto">' + esc(s.texto) + '</p>' +
       (s.detalle ? '<details><summary>Cómo es</summary><p>' + esc(s.detalle) + (s.enlace ? ' <a href="' + s.enlace + '">Ir al capítulo</a>.' : '') + '</p></details>' : '') + '</div>' +
       '<div class="fila-datos"><dl class="fila-specs" style="margin:0">' + specs + '</dl>' +
-      '<dl class="fila-precio" style="margin:0"><dt>Precio</dt><dd class="' + (s.precio ? 'tiene' : '') + '">' + esc(s.precio || 'A consultar') + '</dd>' + (s.promo ? '<dd class="fila-promo">' + esc(s.promo) + '</dd>' : '') + '</dl></div>' +
+      '<dl class="fila-precio" style="margin:0"><dt>Precio</dt><dd class="' + (s.precio ? 'tiene' : '') + '">' + esc(s.precio || 'A consultar') + '</dd>' + (promo ? '<dd class="fila-promo' + (promo.viva ? ' viva' : '') + '">' + esc(promo.txt) + '</dd>' : '') + '</dl></div>' +
       '<button type="button" class="sumar" data-id="' + s.id + '" data-nombre="' + esc(s.nombre) + '" aria-pressed="false">+</button>' +
       '</li>';
   }
@@ -343,7 +358,11 @@
       '<div class="trazo">' + rasgo([0, 1, 2, 3], '205 775 475 118') + '<p>Cejas</p></div>' +
       '<div class="trazo">' + rasgo([16, 17, 18], '322 1200 228 152') + '<p>Labios</p></div>' +
       '<div class="trazo">' + rasgo([4, 5, 6, 7, 8], '216 840 192 126') + '<p>Ojos</p></div></div>' +
-      '<div class="cap-media dos aparece">' + fig('cejas.jpg', 'Cejas, recién terminadas', '1/1', 1300, 1387) + fig('eyeliner.jpg', 'Eyeliner, recién terminado', '1.42', 1700, 944) + '</div>';
+      '<div class="cap-media tres aparece">' + fig('cejas-magic.jpg', 'Cejas Magic Shading', '1.1', 810, 739) + fig('labios-rosa.jpg', 'Labios', '2.18', 1045, 480) + fig('eyeliner-soft.jpg', 'Eyeliner Soft Liner', '2.18', 1080, 510) + '</div>' +
+      '<p class="cap-credito">Trabajos de Kamila Guseynova, máster de micropigmentación, publicados por Frida.</p>';
+  }
+  function extraCapilar() {
+    return '<div class="cap-media mitad aparece">' + fig('ad/capilar-antes.jpg', 'Antes', '.875', 860, 984) + fig('ad/capilar-despues.jpg', 'Después de dos sesiones', '.875', 860, 984) + '</div>';
   }
   function extraMirada() {
     return '<div class="cap-media dos-b aparece">' + fig('pestanas-perfil.jpg', 'Pestañas pelo a pelo', '1.37', 1700, 1240) + fig('pestanas-natural.jpg', 'Efecto natural', '1/1', 1700, 1257) + '</div>';
@@ -377,7 +396,8 @@
   var TONOS = [['Rojo Frida', '#a3212e'], ['Rosa viejo', '#c58f92'], ['Nude', '#d9b9a3'], ['Ciruela', '#5b2a47'], ['Lila acuarela', '#9b83b3'], ['Oro hoja', '#c9a45e'], ['Negro', '#1e1a20']];
   var FORMAS = window.FRIDA_MANO.FORMAS;
   function extraUnas() {
-    return '<div class="lienzo aparece"><div class="unas-vista" id="unasVista">' + window.FRIDA_MANO('Almendra', TONOS[0][1]) + '</div><div>' +
+    return '<div class="cap-media dos aparece">' + fig('unas-rojas.jpg', 'Semipermanente con decoración', '1.1', 1080, 985) + fig('unas-negras.jpg', 'Diseño a mano', '1.49', 1080, 725) + '</div>' +
+      '<div class="lienzo aparece"><div class="unas-vista" id="unasVista">' + window.FRIDA_MANO('Almendra', TONOS[0][1]) + '</div><div>' +
       '<p class="lienzo-tit">Pruébatelas aquí</p>' +
       '<p class="lienzo-et">Tono</p><div class="tonos" id="tonos" role="group" aria-label="Tono de uñas">' + TONOS.map(function (t, i) { return '<button type="button" class="tono" style="--c:' + t[1] + '" data-i="' + i + '" aria-label="' + t[0] + '" aria-pressed="' + (i === 0) + '"></button>'; }).join('') + '</div>' +
       '<p class="lienzo-et">Forma</p><div class="formas" id="formas" role="group" aria-label="Forma de uñas">' + Object.keys(FORMAS).map(function (f, i) { return '<button type="button" class="chip" data-f="' + f + '" aria-pressed="' + (i === 0) + '">' + f + '</button>'; }).join('') + '</div>' +
@@ -387,7 +407,7 @@
   function montarGama() {
     var cont = $('#capitulos');
     cont.innerHTML = GAMA.map(function (c) {
-      var extra = c.id === 'micropigmentacion' ? extraMicro() : c.id === 'mirada' ? extraMirada() : c.extra === 'tatuajes' ? extraTatuajes() : c.extra === 'unas' ? extraUnas() : '';
+      var extra = c.id === 'micropigmentacion' ? extraMicro() : c.id === 'mirada' ? extraMirada() : c.extra === 'tatuajes' ? extraTatuajes() : c.extra === 'unas' ? extraUnas() : c.extra === 'capilar' ? extraCapilar() : '';
       var ramo = c.flor === 'flores.png';
       return '<section class="cap" id="' + c.id + '" data-tinte="' + c.tinte + '" data-cap aria-labelledby="t-' + c.id + '">' +
         '<img class="cap-flor' + (ramo ? ' ramo' : '') + '" src="img/arte/' + c.flor + '" alt="" loading="lazy">' +
@@ -396,7 +416,7 @@
         '<p class="cap-lema">' + esc(c.lema) + '</p><p class="cap-intro">' + esc(c.intro) + '</p></div>' +
         extra +
         '<ul class="lista">' + c.servicios.map(filaHTML).join('') + '</ul>' +
-        (c.nota ? '<p class="cap-nota">* Valores orientativos. Dependen de cada piel y de cada caso, y se confirman en la valoración.</p>' : '') +
+        (c.nota ? '<p class="cap-nota">* Valores orientativos: dependen de cada caso. Los precios salen de publicaciones del salón y pueden haber cambiado, así que se confirman al pedir cita.</p>' : '') +
         '</div></section>';
     }).join('');
 
@@ -483,10 +503,10 @@
   /* ---------- Menú ---------- */
   function montarMenu() {
     var items = [
-      ['#ofertas', 'Ofertas de hoy', 'pestanas-azul.jpg'], ['#micropigmentacion', 'Micropigmentación', 'cejas.jpg'], ['#mirada', 'Mirada', 'pestanas-perfil.jpg'],
-      ['#laser', 'Láser', 'pestanas-verde.jpg'], ['#unas', 'Uñas', 'pestanas-natural.jpg'], ['#faciales', 'Faciales', 'mirada-completa.jpg'], ['#masajes', 'Masajes', 'ojo-portada.jpg'],
-      ['#corporales', 'Corporales', 'pestanas-densas.jpg'], ['#capilar', 'Capilar', 'eyeliner.jpg'], ['#resultados', 'Resultados', 'pestanas-azul.jpg'],
-      ['#regalo', 'Tarjeta regalo', 'fachada.jpg'], ['#visita', 'Ven a vernos', 'fachada.jpg']
+      ['#ofertas', 'Ofertas de hoy', 'labios-aquarelle.jpg'], ['#micropigmentacion', 'Micropigmentación', 'labios-rosa.jpg'], ['#mirada', 'Mirada', 'pestanas-perfil.jpg'],
+      ['#laser', 'Láser', 'ad/retirar-despues.jpg'], ['#unas', 'Uñas', 'unas-rojas.jpg'], ['#faciales', 'Faciales', 'mirada-completa.jpg'], ['#masajes', 'Masajes', 'ojo-portada.jpg'],
+      ['#corporales', 'Corporales', 'pestanas-azul.jpg'], ['#capilar', 'Capilar', 'ad/capilar-despues.jpg'], ['#resultados', 'Resultados', 'eyeliner-soft.jpg'],
+      ['#antes-despues', 'Antes y después', 'unas-francesa.jpg'], ['#regalo', 'Tarjeta regalo', 'unas-oro.jpg'], ['#visita', 'Ven a vernos', 'fachada.jpg']
     ];
     var nav = $('#menuNav');
     nav.innerHTML = items.map(function (i) { return '<a href="' + i[0] + '" data-img="img/' + i[2] + '" data-cerrar>' + i[1] + '</a>'; }).join('') +
@@ -530,44 +550,33 @@
       $('#visorImg').src = v.dataset.ver; $('#visorImg').alt = v.dataset.pie; $('#visorPie').textContent = v.dataset.pie; visor.showModal();
     });
     $('#destacadas').innerHTML = window.FRIDA_DESTACADAS.map(function (d) {
-      return '<a class="dest" target="_blank" rel="noopener" href="' + C.instagram + '"><img src="img/destacadas/' + d.img + '" alt="" width="150" height="150" loading="lazy">' + esc(d.t) + '</a>';
+      return '<a class="dest" target="_blank" rel="noopener" href="https://www.instagram.com/stories/highlights/' + d.id + '/"><img src="img/destacadas/' + d.img + '" alt="" width="150" height="150" loading="lazy">' + esc(d.t) + '</a>';
     }).join('');
   }
 
   /* ---------- Antes y después ---------- */
   function montarAntesDespues() {
     var lista = window.FRIDA_ANTES_DESPUES, comp = $('#adComparador'), A = $('#adAntes'), D = $('#adDespues'), R = $('#adRango');
-    function recorte(el, item, rc) {
-      var W = item.ancho, H = item.alto;
-      el.style.backgroundImage = 'url(img/' + item.imagen + ')';
-      el.style.backgroundSize = (W / rc.w * 100) + '% ' + (H / rc.h * 100) + '%';
-      el.style.backgroundPosition = (rc.x / (W - rc.w) * 100) + '% ' + (rc.y / (H - rc.h) * 100) + '%';
-    }
     function ver(i) {
       var it = lista[i];
-      if (it.imagen) {
-        recorte(A, it, it.recorteAntes); recorte(D, it, it.recorteDespues);
-        comp.style.setProperty('--ar', it.recorteAntes.w + '/' + it.recorteAntes.h);
-      } else {
-        A.style.cssText = 'background:url(img/' + it.antes + ') center/cover';
-        D.style.cssText = 'background:url(img/' + it.despues + ') center/cover';
-        comp.style.setProperty('--ar', it.ar || '4/5');
-      }
-      $('#adTexto').innerHTML = '<b style="font-weight:400">' + esc(it.titulo) + '.</b> ' + esc(it.texto);
+      A.style.backgroundImage = 'url(img/' + it.antes + ')';
+      D.style.backgroundImage = 'url(img/' + it.despues + ')';
+      comp.style.setProperty('--proporcion', it.ar[0] / it.ar[1]);
+      comp.style.setProperty('--pos', '50%');
+      R.value = 50;
+      $('#adTexto').textContent = it.texto;
       $$('#adBotones .chip').forEach(function (b, k) { b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
     }
-    if (lista.length > 1) {
-      $('#adBotones').innerHTML = lista.map(function (it, i) { return '<button type="button" class="chip" data-i="' + i + '">' + esc(it.titulo) + '</button>'; }).join('');
-      $('#adBotones').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (b) ver(+b.dataset.i); });
-    }
+    $('#adBotones').innerHTML = lista.map(function (it, i) { return '<button type="button" class="chip" data-i="' + i + '" aria-pressed="false">' + esc(it.titulo) + '</button>'; }).join('');
+    $('#adBotones').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (b) ver(+b.dataset.i); });
     R.addEventListener('input', function () { comp.style.setProperty('--pos', R.value + '%'); });
     ver(0);
   }
 
   /* ---------- Tarjeta regalo ---------- */
   function montarRegalo() {
-    var sel = $('#fQue'), opts = ['Lo que elija', 'Masaje corporal', 'Chocolaterapia', 'Limpieza de cutis profunda', 'Manicura semipermanente', 'Pedicura completa', 'Pestañas pelo a pelo', 'Lifting de pestañas', 'Micropigmentación de cejas', 'Maderoterapia', 'Peeling corporal'];
-    sel.innerHTML = opts.map(function (o) { return '<option' + (o === 'Masaje corporal' ? ' selected' : '') + '>' + o + '</option>'; }).join('');
+    var sel = $('#fQue'), opts = ['Lo que elija', 'Masaje relajante', 'Chocolaterapia', 'Ritual de belleza con masaje', 'Limpieza de cutis profunda', 'Oroterapia facial', 'Manicura semipermanente', 'Pedicura completa', 'Pestañas pelo a pelo', 'Lifting de pestañas', 'Micropigmentación de cejas', 'Maderoterapia', 'Peeling corporal'];
+    sel.innerHTML = opts.map(function (o) { return '<option' + (o === 'Masaje relajante' ? ' selected' : '') + '>' + o + '</option>'; }).join('');
     function pinta() {
       $('#tjPara').textContent = $('#fPara').value.trim() || 'Alguien especial';
       $('#tjDe').textContent = $('#fDe').value.trim() || 'Ti';

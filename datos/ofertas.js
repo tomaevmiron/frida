@@ -9,6 +9,9 @@
      - Si "hasta" ya pasó: desaparece y queda en el calendario del año.
      - Si no hay ninguna activa: la web dice claramente que hoy no hay ofertas.
 
+   "servicios" enlaza la oferta con las fichas de servicios.js: esas fichas
+   mostrarán solas "En oferta ahora" o "Última promo" según la fecha.
+
    Para añadir una nueva, copia un bloque y cambia los datos.
    Fechas siempre en formato AAAA-MM-DD.
    ============================================================ */
@@ -19,7 +22,8 @@ window.FRIDA_OFERTAS = [
     detalle: 'Manicura semipermanente con refuerzo y limpieza de cutis profunda.',
     precio: 48,
     desde: '2026-10-30',
-    hasta: '2026-11-30'
+    hasta: '2026-11-30',
+    servicios: ['semi-manos', 'limpieza-cutis']
   },
   {
     etiqueta: 'Black Friday',
@@ -27,7 +31,8 @@ window.FRIDA_OFERTAS = [
     detalle: 'Pestaña pelo a pelo efecto natural o lifting de pestañas, más masaje de 40 minutos o peeling corporal.',
     precio: 40,
     desde: '2026-10-30',
-    hasta: '2026-11-30'
+    hasta: '2026-11-30',
+    servicios: ['pestanas', 'lifting', 'masaje', 'peeling']
   },
 
   /* ---- Ofertas ya terminadas: alimentan el calendario del año ---- */
@@ -38,7 +43,8 @@ window.FRIDA_OFERTAS = [
     precio: 15,
     desde: '2026-09-27',
     hasta: '2026-09-27',
-    sinFin: true          // la publicación no indicaba fecha de fin
+    sinFin: true,          // la publicación no indicaba fecha de fin
+    servicios: ['pedicura']
   },
   {
     etiqueta: 'Septiembre',
@@ -46,7 +52,8 @@ window.FRIDA_OFERTAS = [
     detalle: 'Higiene facial profunda a precio de promoción.',
     precio: 30,
     desde: '2026-09-06',
-    hasta: '2026-09-15'
+    hasta: '2026-09-15',
+    servicios: ['higiene-facial']
   },
   {
     etiqueta: 'Septiembre',
@@ -54,7 +61,8 @@ window.FRIDA_OFERTAS = [
     detalle: 'Citas limitadas durante todo el mes.',
     precio: 35,
     desde: '2026-09-01',
-    hasta: '2026-09-30'
+    hasta: '2026-09-30',
+    servicios: ['semi-manos-pies']
   },
   {
     etiqueta: 'Solo una semana',
@@ -62,7 +70,8 @@ window.FRIDA_OFERTAS = [
     detalle: 'Sesión de 40 minutos.',
     precio: 20,
     desde: '2026-08-17',
-    hasta: '2026-08-23'
+    hasta: '2026-08-23',
+    servicios: ['maderoterapia']
   },
   {
     etiqueta: 'Hasta el viernes',
@@ -70,7 +79,8 @@ window.FRIDA_OFERTAS = [
     detalle: 'Con masaje e hidratación profunda.',
     precio: 25,
     desde: '2026-04-20',
-    hasta: '2026-04-24'
+    hasta: '2026-04-24',
+    servicios: ['peeling']
   },
   {
     etiqueta: 'Marzo',
@@ -78,7 +88,8 @@ window.FRIDA_OFERTAS = [
     detalle: 'Piernas, flancos y barriga, más una sesión de presoterapia.',
     precio: 20,
     desde: '2026-03-01',
-    hasta: '2026-03-31'
+    hasta: '2026-03-31',
+    servicios: ['drenante', 'presoterapia']
   },
   {
     etiqueta: 'Enero',
@@ -86,6 +97,7 @@ window.FRIDA_OFERTAS = [
     detalle: 'Masaje de 30 minutos con chocolaterapia.',
     precio: 15,
     desde: '2026-01-26',
-    hasta: '2026-01-31'
+    hasta: '2026-01-31',
+    servicios: ['chocolaterapia']
   }
 ];
