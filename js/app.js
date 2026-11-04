@@ -375,20 +375,9 @@
       '</div><div class="calc-vista"><div class="calc-marco" id="calcMarco">' + ROSA + '<span class="calc-cota" id="calcCota"></span></div></div></div>';
   }
   var TONOS = [['Rojo Frida', '#a3212e'], ['Rosa viejo', '#c58f92'], ['Nude', '#d9b9a3'], ['Ciruela', '#5b2a47'], ['Lila acuarela', '#9b83b3'], ['Oro hoja', '#c9a45e'], ['Negro', '#1e1a20']];
-  var FORMAS = {
-    Almendra: 'M15 64 C15 77 45 77 45 64 L46 42 C46 27 37 8 30 2 C23 8 14 27 14 42 Z',
-    Redonda: 'M15 64 C15 77 45 77 45 64 L46 32 C46 18 39 9 30 9 C21 9 14 18 14 32 Z',
-    Cuadrada: 'M15 64 C15 77 45 77 45 64 L46 13 C46 10 44 9 42 9 L18 9 C16 9 14 10 14 13 Z'
-  };
+  var FORMAS = window.FRIDA_MANO.FORMAS;
   function extraUnas() {
-    // Cuatro dedos y pulgar, dibujados con la misma línea que el retrato
-    var alturas = [52, 12, 0, 16, 70];
-    var unas = alturas.map(function (m) {
-      return '<div class="una" style="margin-top:' + m + 'px"><svg viewBox="0 0 60 240" aria-hidden="true">' +
-        '<path class="dedo" d="M7 240 V66 C7 48 11 34 18 26 M53 240 V66 C53 48 49 34 42 26 M15 142 C24 146 36 146 45 142 M17 151 C25 154 35 154 43 151"/>' +
-        '<path class="una-f" fill="#a3212e" d="' + FORMAS.Almendra + '"/><path class="brillo" d="M21 60 C19 46 21 30 26 18 C24 34 24 48 25 62 Z"/></svg></div>';
-    }).join('');
-    return '<div class="lienzo aparece"><div class="unas-vista" id="unasVista">' + unas + '</div><div>' +
+    return '<div class="lienzo aparece"><div class="unas-vista" id="unasVista">' + window.FRIDA_MANO('Almendra', TONOS[0][1]) + '</div><div>' +
       '<p class="lienzo-tit">Pruébatelas aquí</p>' +
       '<p class="lienzo-et">Tono</p><div class="tonos" id="tonos" role="group" aria-label="Tono de uñas">' + TONOS.map(function (t, i) { return '<button type="button" class="tono" style="--c:' + t[1] + '" data-i="' + i + '" aria-label="' + t[0] + '" aria-pressed="' + (i === 0) + '"></button>'; }).join('') + '</div>' +
       '<p class="lienzo-et">Forma</p><div class="formas" id="formas" role="group" aria-label="Forma de uñas">' + Object.keys(FORMAS).map(function (f, i) { return '<button type="button" class="chip" data-f="' + f + '" aria-pressed="' + (i === 0) + '">' + f + '</button>'; }).join('') + '</div>' +
